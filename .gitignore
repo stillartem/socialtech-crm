@@ -28,16 +28,10 @@ container-data
 /.env.local.php
 /.env.*.local
 
-###> symfony/framework-bundle ###
-/.env.local
-/.env.local.php
-/.env.*.local
-/public/bundles/
-/var/
-/vendor/
-###< symfony/framework-bundle ###
+### storage
+analytic_json
+user_json
 
-###> symfony/phpunit-bridge ###
 .phpunit
 /phpunit.xml
 ###< symfony/phpunit-bridge ###

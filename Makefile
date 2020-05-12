@@ -36,6 +36,7 @@ install:
 	@docker-compose up -d --build --force-recreate
 
 	@echo "\033[32mStop supervisor...\033[0m"
+	@docker-compose exec -T php mkdir -p /var/www/socialtech/var/log/supervisor
 	@docker-compose exec -T php service supervisor stop
 
 	@echo "\033[33mUpdate composer...\033[0m"
@@ -51,6 +52,12 @@ install:
 
 	@echo "\033[32mRestart supervisor...\033[0m"
 	@docker-compose exec -T php service supervisor start
+
+	@echo "\033[32mCreate folder for static files...\033[0m"
+	@docker-compose exec -T php mkdir -p /var/www/socialtech/user_json
+	@docker-compose exec -T php mkdir -p /var/www/socialtech/analytic_json
+	@docker-compose exec -T php mkdir -p /var/www/socialtech/tests/user_json
+	@docker-compose exec -T php mkdir -p /var/www/socialtech/tests/analytic_json
 
 	@echo "\033[33mDone \033[0m"
 
