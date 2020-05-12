@@ -1,0 +1,31 @@
+parameters:
+  path_to_customer_storage: '%kernel.project_dir%/tests/user_json'
+  path_for_analytics: '%kernel.project_dir%/tests/analytic_json'
+
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: '%services_defaults_public%'
+
+  #####   RESOURCES
+  App\Port\Command\:
+    resource: ../src/Port/Command/
+    exclude: ../src/Port/Command/Maker/
+
+  App\Port\Worker\:
+    resource: ../src/Port/Worker/
+
+  App\Domain\:
+    resource: ../src/Domain/*/{Service,Repository,EventSubscriber}
+
+  App\Tests\Helper\RepositoryMock\:
+    resource: ../tests/Helper/RepositoryMock/
+
+  App\Domain\SocialTechCustomer\Repository\AuthTokenRepository: '@App\Tests\Helper\RepositoryMock\AuthTokenRepository'
+
+  App\Domain\SocialTechCustomer\Repository\CustomerRepository: '@App\Tests\Helper\RepositoryMock\CustomerRepository'
+
+  SocialTech\:
+    resource: '../vendor/socialtechio/slow-storage-emulator/src/*'

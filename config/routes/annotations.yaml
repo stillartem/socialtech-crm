@@ -1,0 +1,3 @@
+controllers:
+    resource: ../../src/Port/Controller/
+    type: annotation

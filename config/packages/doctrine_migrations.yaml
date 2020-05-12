@@ -1,0 +1,6 @@
+doctrine_migrations:
+    dir_name: '%kernel.project_dir%/migrations'
+    # namespace is arbitrary but should be different from App\Migrations
+    name: 'Socialtech Migrations'
+    # This is only works if your database supports transactions for DDL statements.
+    all_or_nothing: true

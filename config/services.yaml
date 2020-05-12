@@ -1,0 +1,32 @@
+parameters:
+    locale: 'en'
+    services_defaults_public: false
+    authTokenLifeTime: '+1 month'    # in DateTime format. Example: +1 day, +15 minutes, +3 hours, +1 hour
+    path_to_customer_storage: '%kernel.project_dir%/user_json'
+    path_for_analytics: '%kernel.project_dir%/analytic_json'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: '%services_defaults_public%'
+
+#####   RESOURCES
+
+    App\Port\Controller\:
+        resource: ../src/Port/Controller/
+        tags: ['controller.service_arguments']
+
+    App\Port\Command\:
+        resource: ../src/Port/Command/
+        exclude: ../src/Port/Command/Maker/
+
+    App\Port\Worker\:
+        resource: ../src/Port/Worker/
+
+    App\Domain\:
+        resource: ../src/Domain/*/{Service,Repository,EventSubscriber}
+
+    SocialTech\:
+        resource: '../vendor/socialtechio/slow-storage-emulator/src/*'
